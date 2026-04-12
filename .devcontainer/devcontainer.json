@@ -1,0 +1,38 @@
+{
+  "build": { "context": "..", "dockerfile": "Dockerfile" },
+  "remoteUser": "vscode",
+
+  "containerEnv": {
+    "DEVCONTAINER": "1",
+
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+    "MISE_DATA_DIR": "/home/vscode/.local/share/mise",
+    "MISE_STATE_DIR": "/home/vscode/.local/share/mise/state",
+    "MISE_CACHE_DIR": "/home/vscode/.local/share/mise/cache",
+
+    "PIP_CACHE_DIR": "/home/vscode/.cache/pip",
+
+    "GOPATH": "/go",
+    "GOMODCACHE": "/go/pkg/mod",
+    "GOCACHE": "/home/vscode/.cache/go-build"
+  },
+
+  "mounts": [
+
+    "source=devpod-pip-cache,target=/home/vscode/.cache/pip,type=volume",
+    "source=devpod-mise,target=/home/vscode/.local/share/mise,type=volume",
+
+    "source=devpod-go-path,target=/go,type=volume",
+    "source=devpod-go-build-cache,target=/home/vscode/.cache/go-build,type=volume"
+  ],
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
+    },
+    "ghcr.io/w3cj/devcontainer-features/firewall:latest": {}
+  },
+
+  "postCreateCommand": "/usr/local/bin/devcontainer-setup"
+}
+

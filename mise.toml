@@ -1,0 +1,7 @@
+# [env]
+# ENVIRONMENT = "homelab"
+# DOCKER_CONTEXT = "homelab"
+
+[tools]
+docker-cli = "latest"
+docker-compose = "latest"
