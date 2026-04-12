@@ -23,17 +23,17 @@ KNOWN_HOSTS=~/.ssh/known_hosts
 
 # Validate required vars
 
-: "${SSH_HOST:?Missing SSH_HOST}"
-: "${SSH_PORT:?Missing SSH_PORT}"
+: "${HOMELAB_REMOTE_HOST:?Missing SSH_HOST}"
+: "${HOMELAB_REMOTE_PORT:?Missing SSH_PORT}"
 
 # Check if already trusted
 
-if ssh-keygen -F "$SSH_HOST" >/dev/null 2>&1; then
-  log "Host $SSH_HOST already trusted"
+if ssh-keygen -F "$HOMELAB_REMOTE_HOST" >/dev/null 2>&1; then
+  log "Host $HOMELAB_REMOTE_HOST already trusted"
 else
-  log "Adding SSH host key for $SSH_HOST:$SSH_PORT"
+  log "Adding SSH host key for $HOMELAB_REMOTE_HOST:$HOMELAB_REMOTE_PORT"
 
-  ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >>"$KNOWN_HOSTS" 2>/dev/null
+  ssh-keyscan -p "$HOMELAB_REMOTE_PORT" -H "$HOMELAB_REMOTE_HOST" >>"$KNOWN_HOSTS" 2>/dev/null
 
   chmod 600 "$KNOWN_HOSTS"
 

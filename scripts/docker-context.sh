@@ -19,17 +19,17 @@ warn() { echo "[!] $*" >&2; }
 
 # Required variables
 
-: "${SSH_HOST:?Missing SSH_HOST}"
-: "${SSH_USER:?Missing SSH_USER}"
-: "${SSH_PORT:?Missing SSH_PORT}"
+: "${HOMELAB_REMOTE_HOST:?Missing SSH_HOST}"
+: "${HOMELAB_REMOTE_USER:?Missing SSH_USER}"
+: "${HOMELAB_REMOTE_PORT:?Missing SSH_PORT}"
 
 # Optional override (default to "homelab")
 
-CONTEXT_NAME="${DOCKER_CONTEXT:-homelab}"
+CONTEXT_NAME="${HOMELAB_CONTEXT:-homelab}"
 
 # Construct expected Docker endpoint (DO NOT export as DOCKER_HOST)
 
-EXPECTED_HOST="ssh://${SSH_USER}@${SSH_HOST}"
+EXPECTED_HOST="ssh://${HOMELAB_REMOTE_USER}@${HOMELAB_REMOTE_HOST}"
 
 # Ensure DOCKER_HOST is not interfering
 

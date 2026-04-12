@@ -1,0 +1,45 @@
+name: ${COMPOSE_PROJECT_NAME}
+
+services:
+  mariadb:
+    image: ${MARIADB_IMAGE}
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    environment:
+      TZ: ${TZ}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+
+    volumes:
+      - type: bind
+        source: ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data
+        target: ${MARIADB_DATA_DIR}
+      - type: bind
+        source: ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/init
+        target: ${MARIADB_INIT_DIR}
+        read_only: true
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mariadb-admin ping -uroot -p$$MARIADB_ROOT_PASSWORD --silent"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}
