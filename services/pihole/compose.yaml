@@ -1,0 +1,17 @@
+name: ${COMPOSE_PROJECT_NAME}
+
+services:
+  pihole:
+    image: ${PIHOLE_IMAGE}
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    network_mode: host
+
+    environment:
+      TZ: ${TZ}
+      FTLCONF_webserver_api_password: ${PIHOLE_WEBPASS}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/etc/pihole
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/dnsmasq:/etc/dnsmasq.d
