@@ -50,7 +50,7 @@ REMOTE_SERVICE_ROOT="${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}"
 
 echo "[*] Ensuring remote directories exist..."
 ssh -p "$HOMELAB_REMOTE_PORT" "${HOMELAB_REMOTE_USER}@${HOMELAB_REMOTE_HOST}" \
-  "mkdir -p '$REMOTE_SERVICE_ROOT/data' '$REMOTE_SERVICE_ROOT/init'"
+  "mkdir -p '$REMOTE_SERVICE_ROOT/data' '$REMOTE_SERVICE_ROOT/init' '$REMOTE_SERVICE_ROOT/config'"
 
 if [ -d "$SERVICE_DIR/init" ]; then
   echo "[*] Syncing init assets..."
@@ -61,6 +61,7 @@ if [ -d "$SERVICE_DIR/init" ]; then
 else
   echo "[*] No init directory, skipping"
 fi
+
 echo "[*] Ensuring shared Docker network exists..."
 docker --context "$HOMELAB_CONTEXT" network inspect "$HOMELAB_BACKBONE_NETWORK" >/dev/null 2>&1 ||
   docker --context "$HOMELAB_CONTEXT" network create "$HOMELAB_BACKBONE_NETWORK"

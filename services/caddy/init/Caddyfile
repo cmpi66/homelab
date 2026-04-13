@@ -1,11 +1,34 @@
+{
+    local_certs
+}
+
 http://api.home.arpa {
+    redir https://api.home.arpa{uri} permanent
+}
+
+https://api.home.arpa {
+    tls internal
     reverse_proxy app-api:8000
 }
 
 http://adminer.home.arpa {
+    redir https://adminer.home.arpa{uri} permanent
+}
+
+https://adminer.home.arpa {
+    tls internal
     reverse_proxy homelab-adminer:8080
 }
 
 http://pfsense.home.arpa {
-    reverse_proxy 10.27.27.1:10443
+    redir https://pfsense.home.arpa{uri} permanent
+}
+
+https://pfsense.home.arpa {
+    tls internal
+    reverse_proxy 10.27.27.1:10443 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
 }
