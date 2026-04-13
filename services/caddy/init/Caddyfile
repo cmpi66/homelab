@@ -20,15 +20,11 @@ https://adminer.home.arpa {
     reverse_proxy homelab-adminer:8080
 }
 
-http://pfsense.home.arpa {
-    redir https://pfsense.home.arpa{uri} permanent
+http://authentik.home.arpa {
+    redir https://authentik.home.arpa{uri} permanent
 }
 
-https://pfsense.home.arpa {
+https://authentik.home.arpa {
     tls internal
-    reverse_proxy 10.27.27.1:10443 {
-        transport http {
-            tls_insecure_skip_verify
-        }
-    }
+    reverse_proxy authentik-server:9000
 }
