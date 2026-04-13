@@ -11,6 +11,7 @@ services:
     environment:
       TZ: ${TZ}
       FTLCONF_webserver_api_password: ${PIHOLE_WEBPASS}
+      FTLCONF_webserver_port: ${FTLCONF_webserver_port}
 
     volumes:
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/etc/pihole

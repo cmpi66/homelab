@@ -14,8 +14,6 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_CONNECT_RETRIES: ${DB_CONNECT_RETRIES}
       DB_CONNECT_RETRY_DELAY: ${DB_CONNECT_RETRY_DELAY}
-    ports:
-      - "${APP_PORT}:8000"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8000/healthz"]
       interval: 10s

@@ -1,0 +1,11 @@
+http://api.home.arpa {
+    reverse_proxy app-api:8000
+}
+
+http://adminer.home.arpa {
+    reverse_proxy homelab-adminer:8080
+}
+
+http://pfsense.home.arpa {
+    reverse_proxy 10.27.27.1:10443
+}
