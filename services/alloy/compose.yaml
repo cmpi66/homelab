@@ -1,0 +1,27 @@
+services:
+  alloy:
+    image: grafana/alloy:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    command: >
+      run
+      --server.http.listen-addr=0.0.0.0:${ALLOY_PORT}
+      --storage.path=/var/lib/alloy/data
+      /etc/alloy/config.alloy
+
+    environment:
+      - TZ=${TZ}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/lib/alloy/data
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/init:/etc/alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}
