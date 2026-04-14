@@ -50,5 +50,9 @@
 	handle @grafana {
 		reverse_proxy grafana:3000
 	}
+	@dockhand host dockhand.home.arpa
+	handle @dockhand {
+		reverse_proxy dockhand:3000
+	}
 }
 
