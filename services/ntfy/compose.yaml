@@ -1,0 +1,25 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    command:
+      - serve
+
+    environment:
+      - TZ=${TZ}
+      - NTFY_BASE_URL=${NTFY_BASE_URL}
+      - NTFY_CACHE_FILE=${NTFY_CACHE_FILE}
+      - NTFY_AUTH_FILE=${NTFY_AUTH_FILE}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/data
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true

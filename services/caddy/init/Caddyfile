@@ -54,5 +54,9 @@
 	handle @dockhand {
 		reverse_proxy dockhand:3000
 	}
+	@ntfy host ntfy.home.arpa
+	handle @ntfy {
+		reverse_proxy ntfy:80
+	}
 }
 
