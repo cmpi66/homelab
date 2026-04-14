@@ -1,0 +1,27 @@
+services:
+  netdata:
+    image: netdata/netdata:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    pid: host
+    network_mode: host
+
+    cap_add:
+      - SYS_PTRACE
+
+    security_opt:
+      - apparmor:unconfined
+
+    environment:
+      - TZ=${TZ}
+
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/lib/netdata
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/cache:/var/cache/netdata
