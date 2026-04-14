@@ -62,6 +62,16 @@ else
   echo "[*] No init directory, skipping"
 fi
 
+if [ -d "$SERVICE_DIR/config" ]; then
+  echo "[*] Syncing config assets..."
+
+  rsync -az --delete -e "ssh -p $HOMELAB_REMOTE_PORT" \
+    "$SERVICE_DIR/config/" \
+    "${HOMELAB_REMOTE_USER}@${HOMELAB_REMOTE_HOST}:$REMOTE_SERVICE_ROOT/config/"
+else
+  echo "[*] No config directory, skipping"
+fi
+
 echo "[*] Ensuring shared Docker network exists..."
 docker --context "$HOMELAB_CONTEXT" network inspect "$HOMELAB_BACKBONE_NETWORK" >/dev/null 2>&1 ||
   docker --context "$HOMELAB_CONTEXT" network create "$HOMELAB_BACKBONE_NETWORK"

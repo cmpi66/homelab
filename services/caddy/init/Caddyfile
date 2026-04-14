@@ -37,5 +37,14 @@
 		reverse_proxy dozzle:8080
 	}
 
+	@homer host homer.home.arpa
+	handle @homer {
+		reverse_proxy homer:8080
+	}
+
+	@loki host loki.home.arpa
+	handle @loki {
+		reverse_proxy loki:3100
+	}
 }
 

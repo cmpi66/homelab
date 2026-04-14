@@ -1,0 +1,18 @@
+services:
+  homer:
+    image: b4bz/homer
+    container_name: homer
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/config:/www/assets
+    user: 1000:1000 # default
+    environment:
+      - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user (see user option)
+    restart: unless-stopped
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}

@@ -1,0 +1,23 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: ${CONTAINER_NAME}
+    user: "${LOKI_UID}:${LOKI_GID}"
+    restart: unless-stopped
+
+    command: -config.file=/etc/loki/config.yaml
+
+    environment:
+      - TZ=${TZ}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/loki
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/config:/etc/loki:ro
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}
