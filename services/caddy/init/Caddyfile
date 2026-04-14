@@ -27,6 +27,15 @@
 	handle @authentik {
 		reverse_proxy authentik-server:9000
 	}
+	@uptime host uptime.home.arpa
+	handle @uptime {
+		reverse_proxy uptime-kuma:3001
+	}
+
+	@dozzle host dozzle.home.arpa
+	handle @dozzle {
+		reverse_proxy dozzle:8080
+	}
 
 }
 

@@ -1,0 +1,20 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/app/data
+
+    networks:
+      - backbone
+
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}
