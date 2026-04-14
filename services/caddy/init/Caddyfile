@@ -1,30 +1,32 @@
-{
-    local_certs
+(authenticate) {
+	reverse_proxy /outpost.goauthentik.io/* authentik-server:9000
+
+	forward_auth authentik-server:9000 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+}
+# Replace this with your domain name.
+*.home.arpa {
+
+	@adminer host adminer.home.arpa
+	handle @adminer {
+		# Uncomment below to enable authentication
+		 import authenticate
+
+		reverse_proxy homelab-adminer:8080
+	}
+
+	@api host api.home.arpa
+	handle @api {
+		reverse_proxy app-api:8000
+	}
+
+	@authentik host authentik.home.arpa
+	handle @authentik {
+		reverse_proxy authentik-server:9000
+	}
+
 }
 
-http://api.home.arpa {
-    redir https://api.home.arpa{uri} permanent
-}
-
-https://api.home.arpa {
-    tls internal
-    reverse_proxy app-api:8000
-}
-
-http://adminer.home.arpa {
-    redir https://adminer.home.arpa{uri} permanent
-}
-
-https://adminer.home.arpa {
-    tls internal
-    reverse_proxy homelab-adminer:8080
-}
-
-http://authentik.home.arpa {
-    redir https://authentik.home.arpa{uri} permanent
-}
-
-https://authentik.home.arpa {
-    tls internal
-    reverse_proxy authentik-server:9000
-}
