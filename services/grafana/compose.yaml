@@ -1,0 +1,22 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ${CONTAINER_NAME}
+    user: "${GRAFANA_UID}:${GRAFANA_GID}"
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/lib/grafana
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    external: true
+    name: ${HOMELAB_BACKBONE_NETWORK}

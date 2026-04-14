@@ -46,5 +46,9 @@
 	handle @loki {
 		reverse_proxy loki:3100
 	}
+	@grafana host grafana.home.arpa
+	handle @grafana {
+		reverse_proxy grafana:3000
+	}
 }
 
