@@ -58,5 +58,13 @@
 	handle @ntfy {
 		reverse_proxy ntfy:80
 	}
+	@cyberchef host cyberchef.home.arpa
+	handle @cyberchef {
+		reverse_proxy cyberchef:8000
+	}
+	@it-tools host tools.home.arpa
+	handle @it-tools {
+		reverse_proxy it-tools:80
+	}
 }
 

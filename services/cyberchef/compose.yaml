@@ -1,0 +1,16 @@
+services:
+  cyberchef:
+    image: mpepping/cyberchef:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true
