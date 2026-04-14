@@ -86,4 +86,5 @@ echo "[*] Deploying $SERVICE..."
     up -d
 )
 
-echo "[✓] Deployment complete"
+# echo "[✓] Deployment complete"
+curl -s -d "✅ $SERVICE deployed" https://ntfy.home.arpa/deploys || true

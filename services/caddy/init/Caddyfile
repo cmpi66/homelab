@@ -66,5 +66,13 @@
 	handle @it-tools {
 		reverse_proxy it-tools:80
 	}
+	@shlink host shlink.home.arpa
+	handle @shlink {
+		reverse_proxy shlink:8080
+	}
+	@forgejo host forgejo.home.arpa
+	handle @forgejo {
+		reverse_proxy forgejo:3000
+	}
 }
 
