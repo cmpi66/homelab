@@ -84,5 +84,9 @@
 	handle @miniflux {
 		reverse_proxy miniflux:8080
 	}
+	@ladder host ladder.home.arpa
+	handle @ladder {
+		reverse_proxy ladder:5000
+	}
 }
 
