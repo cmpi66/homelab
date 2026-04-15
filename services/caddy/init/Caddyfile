@@ -74,5 +74,10 @@
 	handle @forgejo {
 		reverse_proxy forgejo:3000
 	}
+
+	@wallabag host wallabag.home.arpa
+	handle @wallabag {
+		reverse_proxy wallabag:80
+	}
 }
 

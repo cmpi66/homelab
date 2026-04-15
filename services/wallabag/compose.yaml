@@ -1,0 +1,29 @@
+services:
+  wallabag:
+    image: wallabag/wallabag:2.6.8
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=${DB_HOST}
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=${DB_NAME}
+      - SYMFONY__ENV__DATABASE_USER=${DB_USER}
+      - SYMFONY__ENV__DATABASE_PASSWORD=${DB_PASSWORD}
+
+      - SYMFONY__ENV__DOMAIN_NAME=https://${WALLABAG_DOMAIN}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/www/wallabag/data
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/images:/var/www/wallabag/web/assets/images
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true
