@@ -1,92 +1,123 @@
 (authenticate) {
 	reverse_proxy /outpost.goauthentik.io/* authentik-server:9000
-
 	forward_auth authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
 		trusted_proxies private_ranges
 	}
 }
-# Replace this with your domain name.
-*.home.arpa {
 
-	@adminer host adminer.home.arpa
+*.cmlabs.xyz {
+	tls {
+		dns digitalocean {env.DNS_PROVIDER_TOKEN}
+	}
+
+	@adminer host adminer.cmlabs.xyz
 	handle @adminer {
-		# Uncomment below to enable authentication
-		 import authenticate
-
+		import authenticate
 		reverse_proxy homelab-adminer:8080
 	}
 
-	@api host api.home.arpa
+	@api host api.cmlabs.xyz
 	handle @api {
 		reverse_proxy app-api:8000
 	}
 
-	@authentik host authentik.home.arpa
+	@authentik host authentik.cmlabs.xyz
 	handle @authentik {
 		reverse_proxy authentik-server:9000
 	}
-	@uptime host uptime.home.arpa
+
+	@uptime host uptime.cmlabs.xyz
 	handle @uptime {
 		reverse_proxy uptime-kuma:3001
 	}
 
-	@dozzle host dozzle.home.arpa
+	@dozzle host dozzle.cmlabs.xyz
 	handle @dozzle {
 		reverse_proxy dozzle:8080
 	}
 
-	@homer host homer.home.arpa
+	@homer host homer.cmlabs.xyz
 	handle @homer {
 		reverse_proxy homer:8080
 	}
 
-	@loki host loki.home.arpa
+	@loki host loki.cmlabs.xyz
 	handle @loki {
 		reverse_proxy loki:3100
 	}
-	@grafana host grafana.home.arpa
+
+	@grafana host grafana.cmlabs.xyz
 	handle @grafana {
 		reverse_proxy grafana:3000
 	}
-	@dockhand host dockhand.home.arpa
+
+	@dockhand host dockhand.cmlabs.xyz
 	handle @dockhand {
 		reverse_proxy dockhand:3000
 	}
-	@ntfy host ntfy.home.arpa
+
+	@ntfy host ntfy.cmlabs.xyz
 	handle @ntfy {
 		reverse_proxy ntfy:80
 	}
-	@cyberchef host cyberchef.home.arpa
+
+	@cyberchef host cyberchef.cmlabs.xyz
 	handle @cyberchef {
 		reverse_proxy cyberchef:8000
 	}
-	@it-tools host tools.home.arpa
+
+	@it-tools host tools.cmlabs.xyz
 	handle @it-tools {
 		reverse_proxy it-tools:80
 	}
-	@shlink host shlink.home.arpa
+
+	@shlink host shlink.cmlabs.xyz
 	handle @shlink {
 		reverse_proxy shlink:8080
 	}
-	@forgejo host forgejo.home.arpa
+
+	@forgejo host forgejo.cmlabs.xyz
 	handle @forgejo {
 		reverse_proxy forgejo:3000
 	}
 
-	@wallabag host wallabag.home.arpa
+	@wallabag host wallabag.cmlabs.xyz
 	handle @wallabag {
 		reverse_proxy wallabag:80
 	}
-  
-	@miniflux host rss.home.arpa
+
+	@miniflux host rss.cmlabs.xyz
 	handle @miniflux {
 		reverse_proxy miniflux:8080
 	}
-	@ladder host ladder.home.arpa
+
+	@ladder host ladder.cmlabs.xyz
 	handle @ladder {
 		reverse_proxy ladder:5000
 	}
-}
 
+	@pi-hole host pihole.cmlabs.xyz
+	handle @pi-hole {
+		reverse_proxy homelab-pihole:8888
+	}
+
+	@pfsense host pfsense.cmlabs.xyz
+	handle @pfsense {
+		reverse_proxy https://10.27.27.1:10443 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
+
+	@truenas host truenas.cmlabs.xyz
+	handle @truenas {
+		reverse_proxy https://10.27.27.14 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
+}

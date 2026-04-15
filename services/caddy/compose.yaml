@@ -1,21 +1,21 @@
 services:
   caddy:
-    image: caddy:2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: caddy-digitalocean:2
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
-
     ports:
       - "${CADDY_HTTP_PORT}:80"
       - "${CADDY_HTTPS_PORT}:443"
-
     environment:
       TZ: ${TZ}
-
+      DNS_PROVIDER_TOKEN: ${DNS_PROVIDER_TOKEN}
     volumes:
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/init:/etc/caddy:ro
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/data
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/config:/config
-
     networks:
       - backbone
 
