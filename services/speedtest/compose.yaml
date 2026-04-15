@@ -1,0 +1,14 @@
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true
+
+
+services:
+    speedtest:
+        restart: unless-stopped
+        container_name: ${CONTAINER_NAME}
+        image: openspeedtest/latest
+        networks:
+         - backbone
+

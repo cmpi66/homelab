@@ -4,13 +4,41 @@ services:
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
 
+    depends_on:
+      db:
+        condition: service_healthy
+
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db/${DB_NAME}?sslmode=disable
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=${ADMIN_USER}
       - ADMIN_PASSWORD=${ADMIN_PASS}
       - TZ=${TZ}
+
+    networks:
+      - backbone
+
+  db:
+    image: postgres:18
+    container_name: ${CONTAINER_NAME}-db
+    restart: unless-stopped
+
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - TZ=${TZ}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/postgres:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
 
     networks:
       - backbone

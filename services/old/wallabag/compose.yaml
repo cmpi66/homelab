@@ -1,0 +1,64 @@
+services:
+  wallabag:
+    image: wallabag/wallabag:2.6.8
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+
+    environment:
+      - TZ=${TZ}
+
+      # ROOT access (important)
+      - MYSQL_ROOT_PASSWORD=rootpassword
+
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
+      - SYMFONY__ENV__DATABASE_HOST=db
+      - SYMFONY__ENV__DATABASE_PORT=3306
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=wallabag
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
+      - SYMFONY__ENV__DATABASE_TABLE_PREFIX=wallabag_
+
+      - SYMFONY__ENV__DOMAIN_NAME=https://${WALLABAG_DOMAIN}
+      - SYMFONY__ENV__SERVER_NAME=Wallabag
+      - SYMFONY__ENV__SECRET=${WALLABAG_SECRET}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/images:/var/www/wallabag/web/assets/images
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/www/wallabag/data
+
+    networks:
+      - backbone
+
+  db:
+    image: mariadb:11
+    container_name: ${CONTAINER_NAME}-db
+    restart: unless-stopped
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_ROOT_HOST=%
+
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/db:/var/lib/mysql
+
+    networks:
+      - backbone
+
+  redis:
+    image: redis:alpine
+    container_name: ${CONTAINER_NAME}-redis
+    restart: unless-stopped
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true

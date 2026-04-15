@@ -100,24 +100,31 @@
 
 	@pi-hole host pihole.cmlabs.xyz
 	handle @pi-hole {
-		reverse_proxy homelab-pihole:8888
+    redir / /admin 302
+		reverse_proxy 10.27.27.11:8888
+	}
+
+	@speedtest host speedtest.cmlabs.xyz
+	handle @speedtest {
+    request_body {
+        max_size 35mb
+      }
+		  reverse_proxy speedtest:3000
+	}
+
+	@truenas host truenas.cmlabs.xyz
+	handle @truenas {
+		reverse_proxy 10.27.27.14:80
 	}
 
 	@pfsense host pfsense.cmlabs.xyz
 	handle @pfsense {
 		reverse_proxy https://10.27.27.1:10443 {
 			transport http {
+        tls
 				tls_insecure_skip_verify
 			}
 		}
 	}
 
-	@truenas host truenas.cmlabs.xyz
-	handle @truenas {
-		reverse_proxy https://10.27.27.14 {
-			transport http {
-				tls_insecure_skip_verify
-			}
-		}
-	}
 }
