@@ -79,5 +79,10 @@
 	handle @wallabag {
 		reverse_proxy wallabag:80
 	}
+  
+	@miniflux host rss.home.arpa
+	handle @miniflux {
+		reverse_proxy miniflux:8080
+	}
 }
 

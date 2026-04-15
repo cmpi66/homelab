@@ -1,0 +1,21 @@
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASS}
+      - TZ=${TZ}
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true
