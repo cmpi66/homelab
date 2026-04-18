@@ -1,0 +1,6 @@
+postgres
+mysql
+mariadb
+*/cache
+*/tmp
+*/locks
