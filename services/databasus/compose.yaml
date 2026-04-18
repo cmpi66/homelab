@@ -2,8 +2,6 @@ services:
   databasus:
     container_name: ${CONTAINER_NAME}
     image: databasus/databasus:latest
-    ports:
-      - "4005:4005"
     volumes:
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/databasus-data
     restart: unless-stopped

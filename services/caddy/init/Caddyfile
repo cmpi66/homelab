@@ -116,9 +116,15 @@
 	handle @truenas {
 		reverse_proxy 10.27.27.14:80
 	}
+
 	@beszel host beszel.cmlabs.xyz
 	handle @beszel {
 		reverse_proxy beszel:8090
+	}
+
+	@databasus host db.cmlabs.xyz
+	handle @databasus {
+		reverse_proxy databasus:4005
 	}
 
 	@netdata host netdata.cmlabs.xyz
