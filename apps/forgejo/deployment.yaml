@@ -20,10 +20,30 @@ spec:
             - { name: http, containerPort: 3000 }
             - { name: ssh, containerPort: 22 }
           env:
-            - { name: USER_UID, value: "1000" }
-            - { name: USER_GID, value: "1000" }
-            - { name: FORGEJO__server__ROOT_URL, value: "https://forgejo.home.arpa/" }
-            - { name: FORGEJO__server__DOMAIN, value: "forgejo.home.arpa" }
+            - name: USER_UID
+              value: "1000"
+            - name: USER_GID
+              value: "1000"
+            - name: FORGEJO__server__ROOT_URL
+              value: "https://forgejo.home.arpa"
+            - name: FORGEJO__server__DOMAIN
+              value: "forgejo.home.arpa"
+            - name: FORGEJO__database__DB_TYPE
+              value: "postgres"
+            - name: FORGEJO__database__HOST
+              value: "postgres-rw.forgejo.svc:5432"
+            - name: FORGEJO__database__NAME
+              value: "forgejo"
+            - name: FORGEJO__database__USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-app
+                  key: username
+            - name: FORGEJO__database__PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-app
+                  key: password
           volumeMounts:
             - { name: data, mountPath: /var/lib/gitea }
           readinessProbe:
