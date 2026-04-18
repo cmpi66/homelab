@@ -14,7 +14,7 @@
 
 	@adminer host adminer.cmlabs.xyz
 	handle @adminer {
-		import authenticate
+		#import authenticate
 		reverse_proxy homelab-adminer:8080
 	}
 
@@ -116,10 +116,29 @@
 	handle @truenas {
 		reverse_proxy 10.27.27.14:80
 	}
+	@beszel host beszel.cmlabs.xyz
+	handle @beszel {
+		reverse_proxy beszel:8090
+	}
+
+	@netdata host netdata.cmlabs.xyz
+	handle @netdata {
+		reverse_proxy http://10.27.27.11:19999
+	}
+
 
 	@pfsense host pfsense.cmlabs.xyz
 	handle @pfsense {
 		reverse_proxy https://10.27.27.1:10443 {
+			transport http {
+        tls
+				tls_insecure_skip_verify
+			}
+		}
+	}
+	@proxmox host proxmox.cmlabs.xyz
+	handle @proxmox {
+		reverse_proxy https://10.27.27.20:8006 {
 			transport http {
         tls
 				tls_insecure_skip_verify

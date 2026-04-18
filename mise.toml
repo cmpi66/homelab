@@ -5,3 +5,11 @@
 [tools]
 docker-cli = "latest"
 docker-compose = "latest"
+kubectl = "latest"
+k9s = "latest"
+helm = "latest"
+kubectx = "latest"
+stern = "latest"
+
+[env]
+KUBECONFIG = "{{config_root}}/k8s/kubeconfig.yaml"

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+  namespace: forgejo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # single-writer PVC; dont do RollingUpdate with RWO
+  selector:
+    matchLabels: { app: forgejo }
+  template:
+    metadata:
+      labels: { app: forgejo }
+    spec:
+      containers:
+        - name: forgejo
+          image: codeberg.org/forgejo/forgejo:14
+          ports:
+            - { name: http, containerPort: 3000 }
+            - { name: ssh, containerPort: 22 }
+          env:
+            - { name: USER_UID, value: "1000" }
+            - { name: USER_GID, value: "1000" }
+            - { name: FORGEJO__server__ROOT_URL, value: "https://forgejo.home.arpa/" }
+            - { name: FORGEJO__server__DOMAIN, value: "forgejo.home.arpa" }
+          volumeMounts:
+            - { name: data, mountPath: /var/lib/gitea }
+          readinessProbe:
+            httpGet: { path: /, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /, port: http }
+            initialDelaySeconds: 20
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: forgejo-data

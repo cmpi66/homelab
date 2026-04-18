@@ -1,0 +1,16 @@
+services:
+  beszel:
+    image: henrygd/beszel
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      - APP_URL=http://beszel.cmlabs.xyz
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/beszel_data
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true

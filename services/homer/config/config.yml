@@ -59,11 +59,11 @@ services:
         tag: "app"
         url: "https://pihole.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
-      - name: "Truenas"
-        logo: "assets/truenas.png"
-        subtitle: "NAS"
+      - name: "Proxmox"
+        logo: "assets/proxmox.png"
+        subtitle: "Proxmox"
         tag: "app"
-        url: "https://truenas.cmlabs.xyz"
+        url: "https://proxmox.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "dockhand"
         logo: "assets/dockhand.png"
@@ -83,6 +83,12 @@ services:
         tag: "app"
         url: "https://adminer.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
+      - name: "Beszel"
+        logo: "assets/beszel.png"
+        subtitle: "beszel on xps"
+        tag: "app"
+        url: "https://beszel.cmlabs.xyz"
+        target: "_blank" # optional html a tag target attribute
       - name: "Authentik"
         logo: "assets/authentik.png"
         subtitle: "Authentik on xps"
@@ -93,12 +99,12 @@ services:
     icon: "fas fa-cloud"
     items:
       - name: "Netdata"
-        logo: "assets/tools/sample.png"
-        subtitle: "Lights Out Monitoring"
+        logo: "assets/netdata.png"
+        subtitle: "netdata"
         tag: "app"
-        url: "https://10.10.30.13/login.html/"
+        url: "https://netdata.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
-      - name: "Daffy - iLO"
+      - name: ""
         logo: "assets/tools/sample.png"
         subtitle: "Lights Out Monitoring"
         tag: "app"
