@@ -10,6 +10,7 @@ k9s = "latest"
 helm = "latest"
 kubectx = "latest"
 stern = "latest"
+flux2 = "latest"
 
 [env]
 KUBECONFIG = "{{config_root}}/k8s/kubeconfig.yaml"
