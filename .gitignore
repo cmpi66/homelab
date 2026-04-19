@@ -44,3 +44,4 @@ Thumbs.db
 .env
 kubeconfig.yaml
 restic-pass
+talos

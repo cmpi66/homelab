@@ -11,6 +11,7 @@ helm = "latest"
 kubectx = "latest"
 stern = "latest"
 flux2 = "latest"
+talosctl = "latest"
 
 [env]
 KUBECONFIG = "{{config_root}}/k8s/kubeconfig.yaml"
