@@ -8,12 +8,12 @@ subtitle: "Dashboard"
 # icon: "fas fa-skull-crossbones" # Optional icon
 
 header: true
-footer: false 
+footer: false
 columns: "4"
 
 # Optional theme customization
 stylesheet:
-   - 'assets/catppuccin-latte.css'
+  - "assets/catppuccin-latte.css"
 
 # Optional message
 #message:
@@ -37,7 +37,7 @@ links:
   # see url field and assets/additionnal-page.yml.dist used in this example:
   - name: "Blog"
     icon: "fas fa-file-alt"
-    url: "https://notes.munozpi.com" 
+    url: "https://notes.munozpi.com"
     target: "_blank" # optional html a tag target attribute
 
 # Services
@@ -59,6 +59,18 @@ services:
         tag: "app"
         url: "https://pihole.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
+      - name: "AP"
+        logo: "assets/netgear-light.png"
+        subtitle: "AP"
+        tag: "app"
+        url: "https://ap.cmlabs.xyz"
+        target: "_blank" # optional html a tag target attribute
+      - name: "switch"
+        logo: "assets/tp-link.png"
+        subtitle: "switch"
+        tag: "app"
+        url: "https://tp.cmlabs.xyz"
+        target: "_blank" # optional html a tag target attribute
       - name: "Proxmox"
         logo: "assets/proxmox.png"
         subtitle: "Proxmox"
@@ -67,31 +79,31 @@ services:
         target: "_blank" # optional html a tag target attribute
       - name: "dockhand"
         logo: "assets/dockhand.png"
-        subtitle: "dockhand on xps"
+        subtitle: "dockhand on"
         tag: "app"
         url: "https://dockhand.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "dozzle"
         logo: "assets/dozzle.png"
-        subtitle: "dockhand on xps"
+        subtitle: "dockhand on"
         tag: "app"
         url: "https://dozzle.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "Adminer"
         logo: "assets/adminer.png"
-        subtitle: "Adminer on xps"
+        subtitle: "Adminer on"
         tag: "app"
         url: "https://adminer.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "Beszel"
-        logo: "assets/beszel.png"
-        subtitle: "beszel on xps"
+        logo: "assets/beszel-light.png"
+        subtitle: "beszel on"
         tag: "app"
         url: "https://beszel.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "Authentik"
         logo: "assets/authentik.png"
-        subtitle: "Authentik on xps"
+        subtitle: "Authentik on"
         tag: "app"
         url: "https://authentik.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
@@ -104,37 +116,75 @@ services:
         tag: "app"
         url: "https://netdata.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
-      - name: ""
-        logo: "assets/tools/sample.png"
-        subtitle: "Lights Out Monitoring"
+      - name: "uptimekuma"
+        logo: "assets/uptime-kuma.png"
+        subtitle: "uptimekuma"
         tag: "app"
-        url: "https://10.10.0.102/"
-      - name: "Scrutiny"
-        logo: "assets/tools/sample.png"
-        subtitle: "SMART data at a glance"
-        tag: "app"
-        url: "https://10.10.0.102/"
-  - name: "External"
-    icon: "fas fa-cloud"
-    items:
-      - name: "Plex"
-        logo: "assets/tools/sample.png"
-        subtitle: "Plex Media Server"
-        tag: "app"
-        url: "https://10.10.2.101:32400"
+        url: "https://uptime.cmlabs.xyz/"
         target: "_blank" # optional html a tag target attribute
-      - name: "Tautulli"
-        logo: "assets/tools/sample.png"
-        subtitle: "Plex Monitoring and Management"
+      - name: "ntfy"
+        logo: "assets/ntfy.png"
+        subtitle: "notifications"
         tag: "app"
-        url: "https://10.10.2.101:8181"
-      - name: "Scrutiny"
-        logo: "assets/tools/sample.png"
-        subtitle: "SMART Info at a Glance"
+        url: "https://ntfy.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "cyberchef"
+        logo: "assets/cyberchef.png"
+        subtitle: "cyberchef"
         tag: "app"
-        url: "10.10.2.101:8080/web/dashboard"
-      - name: "Portainer - svr-plex-01"
-        logo: "assets/tools/sample.png"
-        subtitle: "Portainer instance residing on svr-plex-01"
+        url: "https://cyberchef.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "IT tools"
+        logo: "assets/it-tools-light.png"
+        subtitle: "it tools"
         tag: "app"
-        url: "http://10.10.2.101:9000/#!/home"
+        url: "https://tools.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Forgejo"
+        logo: "assets/forgejo.png"
+        subtitle: "git"
+        tag: "app"
+        url: "https://forgejo.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "13 ft ladder"
+        logo: "assets/13ft.png"
+        subtitle: "ladder"
+        tag: "app"
+        url: "https://ladder.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "speedtest"
+        logo: "assets/openspeedtest.png"
+        subtitle: "speedtest"
+        tag: "app"
+        url: "https://speedtest.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "miniflux"
+        logo: "assets/miniflux-light.png"
+        subtitle: "rss"
+        tag: "app"
+        url: "https://rss.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+  # - name: "External"
+  #   icon: "fas fa-cloud"
+  #   items:
+  #     - name: "Plex"
+  #       logo: "assets/tools/sample.png"
+  #       subtitle: "Plex Media Server"
+  #       tag: "app"
+  #       url: "https://10.10.2.101:32400"
+  #       target: "_blank" # optional html a tag target attribute
+  #     - name: "Tautulli"
+  #       logo: "assets/tools/sample.png"
+  #       subtitle: "Plex Monitoring and Management"
+  #       tag: "app"
+  #       url: "https://10.10.2.101:8181"
+  #     - name: "Scrutiny"
+  #       logo: "assets/tools/sample.png"
+  #       subtitle: "SMART Info at a Glance"
+  #       tag: "app"
+  #       url: "10.10.2.101:8080/web/dashboard"
+  #     - name: "Portainer - svr-plex-01"
+  #       logo: "assets/tools/sample.png"
+  #       subtitle: "Portainer instance residing on svr-plex-01"
+  #       tag: "app"
+  #       url: "http://10.10.2.101:9000/#!/home"
