@@ -79,25 +79,25 @@ services:
         target: "_blank" # optional html a tag target attribute
       - name: "dockhand"
         logo: "assets/dockhand.png"
-        subtitle: "dockhand on"
+        subtitle: "dockhand"
         tag: "app"
         url: "https://dockhand.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "dozzle"
         logo: "assets/dozzle.png"
-        subtitle: "dockhand on"
+        subtitle: "dockhand"
         tag: "app"
         url: "https://dozzle.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "Adminer"
         logo: "assets/adminer.png"
-        subtitle: "Adminer on"
+        subtitle: "Adminer"
         tag: "app"
         url: "https://adminer.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
       - name: "Beszel"
         logo: "assets/beszel-light.png"
-        subtitle: "beszel on"
+        subtitle: "beszel"
         tag: "app"
         url: "https://beszel.cmlabs.xyz"
         target: "_blank" # optional html a tag target attribute
@@ -163,6 +163,12 @@ services:
         subtitle: "rss"
         tag: "app"
         url: "https://rss.cmlabs.xyz/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "databasus"
+        logo: "assets/databasus.png"
+        subtitle: "db backup"
+        tag: "app"
+        url: "https://db.cmlabs.xyz/"
         target: "_blank" # optional html a tag target attribute
   # - name: "External"
   #   icon: "fas fa-cloud"

@@ -34,11 +34,11 @@ services:
       - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/postgres:/var/lib/postgresql
 
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${DB_USER}"]
-      interval: 10s
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}"]
+      interval: 5s
       timeout: 3s
-      retries: 5
-      start_period: 20s
+      retries: 10
+      start_period: 30s
 
     networks:
       - backbone

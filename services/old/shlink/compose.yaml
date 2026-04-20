@@ -1,0 +1,59 @@
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+    depends_on:
+      - db
+
+    environment:
+      - TZ=${TZ}
+      - DEFAULT_DOMAIN=${SHLINK_DOMAIN}
+      - IS_HTTPS_ENABLED=true
+
+      - DB_DRIVER=postgres
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+    # volumes:
+    #   - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/shlink-data:/etc/shlink/data
+
+    networks:
+      - backbone
+
+  # shlink-web-client:
+  #   image: shlinkio/shlink-web-client:stable
+  #   container_name: shlink-web-client
+  #   environment:
+  #     - SHLINK_SERVER_URL=http://localhost:8080
+  #     - SHLINK_SERVER_API_KEY=${API_KEY}
+  #   depends_on:
+  #     - shlink
+  #   restart: unless-stopped
+  #
+  #   networks:
+  #     - backbone
+
+  db:
+    image: postgres:16-alpine
+    container_name: ${CONTAINER_NAME}-db
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+
+    volumes:
+      - ${HOMELAB_DATA_ROOT}/${SERVICE_DATA_SUBDIR}/data:/var/lib/postgresql/data
+
+    networks:
+      - backbone
+
+networks:
+  backbone:
+    name: ${HOMELAB_BACKBONE_NETWORK}
+    external: true
