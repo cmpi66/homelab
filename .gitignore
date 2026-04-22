@@ -45,3 +45,20 @@ Thumbs.db
 kubeconfig.yaml
 restic-pass
 talos
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.lock.hcl
+
+# Packer
+*.packerlog
+
+# Secrets / local overrides
+*.auto.pkrvars.hcl
+terraform.tfvars
+*.secret
+variables.pkrvars.hcl
+iac

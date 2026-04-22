@@ -5,10 +5,13 @@
 [tools]
 docker-cli = "latest"
 docker-compose = "latest"
+terraform = "latest"
+packer = "latest"
 kubectl = "latest"
 k9s = "latest"
 helm = "latest"
 kubectx = "latest"
+kubens = "latest"
 stern = "latest"
 flux2 = "latest"
 talosctl = "latest"
