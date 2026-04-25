@@ -1,6 +1,8 @@
 services:
   miniflux:
     image: miniflux/miniflux:latest
+    links:
+      - db
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
 
